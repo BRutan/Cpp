@@ -24,7 +24,7 @@ public:
 	////////////////////////////
 	// Constructors/Destructor:
 	////////////////////////////
-	LessThan() : stored(0)									// Default Constructor.
+	LessThan() : stored(0)						// Default Constructor.
 	{
 
 	}
@@ -32,18 +32,18 @@ public:
 	{
 
 	}
-	LessThan(const LessThan &lt_in) : stored(lt_in.stored)	// Copy Constructor.
+	LessThan(const LessThan &lt_in) : stored(lt_in.stored)		// Copy Constructor.
 	{
 
 	}
-	virtual ~LessThan()										// Destructor.
+	virtual ~LessThan()						// Destructor.
 	{
 
 	}
 	////////////////////////////
 	// Overloaded Operators:
 	////////////////////////////
-	LessThan& operator=(const LessThan &lt_in)				// Assignment operator.
+	LessThan& operator=(const LessThan &lt_in)			// Assignment operator.
 	{
 		if (this != &lt_in)
 		{
@@ -51,7 +51,7 @@ public:
 		}
 		return *this;
 	}
-	bool operator()(double in)								// Overloaded parentheses operator (functor operator).
+	bool operator()(double in)					// Overloaded parentheses operator (functor operator).
 	{
 		return in < stored;
 	}
