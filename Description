@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------------------------------------------------------------------
+CAD: 
+* Contains derived and base shape classes meant to represent objects inEuclidean space, each with appropriate and intuitive member functions.
+* Note: does not contain source with main method.
+-------------------------------------------------------------------------------------------------------------------------------------------
+Options: 
+* Contains classes representing various types of options on financial assets (European, American Perpetual) with appropriate and intuitive 
+  functionality (price generator, finite difference method approximation for option "Greeks", etc). Also contains generic MeshGenerator 
+  class that outputs vector or vector of vectors containing change in method provided by caller using function objects given change in Option
+  parameter over fixed range.
+* Note: Requires Boost library.
+-------------------------------------------------------------------------------------------------------------------------------------------
