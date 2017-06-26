@@ -1,14 +1,15 @@
+----------------------------------------------------------------------------------------------------------------------------------
 Respository Description:
+----------------------------------------------------------------------------------------------------------------------------------
+* Example C++ code from previous coursework and side projects. 
+----------------------------------------------------------------------------------------------------------------------------------
+* Folders:
 
-Example C++ code from previous coursework and side projects. 
+-CAD: Contains shape-type classes (point, line, circle), functors and exceptions detailing misuse. Example program contained in Example folder with compilation instructions. 
 
-Folders:
+-Options: Contains classes describing financial options (European, American), Monte Carlo simulation and exceptions detailing misuse. Also contains COM object usage to output behavior of these clsases based upon inputs to Microsoft Excel spreadsheets. Example programs contained in Example folder with compilation instructions.
 
--CAD: Contains shape-type classes (point, line, circle), exceptions and functors that demonstrate polymorphism and ML concepts (association, composition and aggregation). Example program contained in Example folder with compilation instructions. 
+-Symboliq: Work in progress. Project aims to convert strings into polynomial objects that can have arithmetic, calculus,   
+----------------------------------------------------------------------------------------------------------------------------------
 
--Options: Contains classes that describe financial options (European, American), exceptions, Monte Carlo simulation and outputting 
-their behavior based upon inputs to Microsoft Excel spreadsheets.  
-
--Symboliq: Library containing ...
-
-Further details are given in every file.
+Each header and source file contained herein provide further details.
