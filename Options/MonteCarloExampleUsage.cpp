@@ -13,9 +13,10 @@
 int main()
 {
 	// Test MonteCarlo class and compare Price output to exact price given by Black-Scholes equation:
-	Options::EuropeanOption euroOpt(3, 30, 40, .03, .03, .3, true);
-	Options::MonteCarlo newMC(3, 30, 40, .03, .03, .3, 10000, 1000, true);
+	Options::EuropeanOption euroOpt(1, 40, 40, .03, .03, .3, true);
+	Options::MonteCarlo newMC(euroOpt, 1000, 100);
 
+	std::cout << "Note: Monte Carlo pricing process takes significant amount of time. " << std::endl;
 	double price = newMC.Price();
 	std::cout << euroOpt.Description() << std::endl;
 	std::cout << "Monte Carlo Generated Price (using Euler-Maruyama): " << price << std::endl;
