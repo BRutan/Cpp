@@ -35,7 +35,7 @@ namespace Options
 	////////////////////////////
 	// Constructors/Destructor:
 	////////////////////////////
-	MonteCarlo::MonteCarlo(double t, double s, double k, double b, double r, double sigma, unsigned long NSIM_in, unsigned long NT_in, bool isCall) : /* Overloaded Constructor. Set all parameters. */
+	MonteCarlo::MonteCarlo(double t, double s, double k, double b, double r, double sigma, bool isCall, unsigned long NSIM_in, unsigned long NT_in) : /* Overloaded Constructor. Set all parameters. */
 		Option(t, s, k, b, r, sigma, isCall), nT(NT_in), nSIM(NSIM_in)	
 	{
 		mainRNG = new boost::variate_generator<boost::mt19937, boost::normal_distribution<double> >(boost::mt19937(time(0)), boost::normal_distribution<>(0, 1));
@@ -43,6 +43,11 @@ namespace Options
 	MonteCarlo::MonteCarlo(const MonteCarlo &in) : Option(in), nT(in.nT), nSIM(in.nSIM) /* Copy Constructor. */
 	{
 			mainRNG = new boost::variate_generator<boost::mt19937, boost::normal_distribution<double> >(boost::mt19937(time(0)), boost::normal_distribution<>(0, 1));
+	}
+	MonteCarlo::MonteCarlo(const Option &in, unsigned long NSIM, unsigned long NT): 							/* Copy Constructor 2, with NT and NSIM setting*/
+		Option(in), nSIM(NSIM), nT(NT)
+	{
+		mainRNG = new boost::variate_generator<boost::mt19937, boost::normal_distribution<double> >(boost::mt19937(time(0)), boost::normal_distribution<>(0, 1));
 	}
 	MonteCarlo::~MonteCarlo()													/* Destructor. */
 	{
@@ -75,32 +80,32 @@ namespace Options
 	////////////////////////////
 	double MonteCarlo::Price() const		/* Get price of option using Monte Carlo method with Euler-Maruyama pdf. */
 	{
-		// NSIM is number of , 1/NT is the time divisor (discretizes "t" into number of subintervals).
+		// NSIM is number of paths to generate, 1/NT is the time divisor (discretizes "t" into number of subintervals).
 		// As NSIM AND NT approach infinity, GeneratePrice approaches the exact price given by the Black-Scholes equation or the American Perpetual Option pricing method. 
-		double S_0, output = 0, payoff = 0;
+		double S, output = 0, payoff = 0;
 		for (unsigned long currTrial = 0; currTrial < nSIM; currTrial++)
 		{
 			// Reset the path:
-			S_0 = Param("s");
+			S = Param("s");
 			// Generate path using Euler-Maruyama partial differentiation scheme:
-			for (unsigned long currTimeInterval = 0; currTimeInterval < nT; currTimeInterval++)
+			for (double currTimeInterval = 0; currTimeInterval < Param("t"); currTimeInterval += 1.0 / (double) nT)
 			{
-				S_0 += (Param("r") * S_0 * (1 / nT)) + (Param("sigma") * std::sqrt(1 / nT) * (*mainRNG)());
+				S += (Param("r") * S * (((double) 1.0 / (double) nT))) + (Param("sigma") * S * std::sqrt((double) 1.0 / (double) nT) * (*mainRNG)());
 			}
 			// Calculate payoff of option at expiry depending on type:
 			if (Option::Type())
 			{
-				payoff += std::max(S_0 - Param("k"), 0.0);
+				payoff = std::max(S - Param("k"), 0.0);
 			}
 			else
 			{
-				payoff += std::max(Param("k") - S_0, 0.0);
+				payoff = std::max(Param("k") - S, 0.0);
 			}
 			// Discount the payoff back to present and accumulate:
-			output += payoff * exp(-Param("r") * Param("t")) / nSIM;
+			output += payoff / (double) nSIM;
 		}
 		// Return the average discounted payoff:
-		return output;
+		return output * exp(-Param("r") * Param("t"));
 	}
 	////////////////////////////
 	// Overloaded Operators:

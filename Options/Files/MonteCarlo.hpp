@@ -45,8 +45,9 @@ namespace Options
 		////////////////////////////
 		// Constructors/Destructor:
 		////////////////////////////
-		MonteCarlo(double t, double s, double k, double b, double r, double sigma, unsigned long NSIM, unsigned long NT, bool isCall); /* Overloaded Constructor. Set all parameters AND set number of time intervals and simulations to run. */
-		MonteCarlo(const MonteCarlo &in);						/* Copy Constructor. */
+		MonteCarlo(double t, double s, double k, double b, double r, double sigma, bool isCall, unsigned long NSIM, unsigned long NT); /* Overloaded Constructor. Set all parameters AND set number of time intervals and simulations to run. */
+		MonteCarlo(const MonteCarlo &in);															/* Copy Constructor 1. */
+		MonteCarlo(const Option &in, unsigned long NSIM, unsigned long NT);							/* Copy Constructor 2, with NT and NSIM setting*/
 		virtual ~MonteCarlo();									/* Destructor. */
 		////////////////////////////
 		// Accessors:
