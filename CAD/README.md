@@ -11,5 +11,5 @@ Contains following examples of usage (using header and source files contained in
     - Create new Visual C++ -> General -> Empty Project.
     - Add all header and source files in File sub-folder to the solution folder and the project itself (via right click 
     \<Project Name\> -> Add -> Existing Item in the Solution Explorer window).
-    - Add CADExampleusage.cpp to the solution folder.
+    - Add CADExampleusage.cpp to the solution folder and to the project.
     - Click Build -> Build Solution (CTRL-SHIFT-B) then click Debug -> Start Debugging (F5) to run the solution.
