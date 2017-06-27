@@ -20,7 +20,7 @@
 
 #include <boost/random/variate_generator.hpp>
 #include <boost/random/mersenne_twister.hpp>
-#include <boost/math/distributions/normal.hpp>
+#include <boost/random/normal_distribution.hpp>
 #include <ctime>
 #include <cmath>
 #include <string>
@@ -38,11 +38,11 @@ namespace Options
 	MonteCarlo::MonteCarlo(double t, double s, double k, double b, double r, double sigma, unsigned long NSIM_in, unsigned long NT_in, bool isCall) : /* Overloaded Constructor. Set all parameters. */
 		Option(t, s, k, b, r, sigma, isCall), nT(NT_in), nSIM(NSIM_in)	
 	{
-		mainRNG = new boost::variate_generator<boost::mt19937, boost::math::normal_distribution<double> >(boost::mt19937(time(0)), boost::math::normal_distribution<>(0, 1));
+		mainRNG = new boost::variate_generator<boost::mt19937, boost::normal_distribution<double> >(boost::mt19937(time(0)), boost::normal_distribution<>(0, 1));
 	}
 	MonteCarlo::MonteCarlo(const MonteCarlo &in) : Option(in), nT(in.nT), nSIM(in.nSIM) /* Copy Constructor. */
 	{
-			mainRNG = new boost::variate_generator<boost::mt19937, boost::math::normal_distribution<double> >(boost::mt19937(time(0)), boost::math::normal_distribution<>(0, 1));
+			mainRNG = new boost::variate_generator<boost::mt19937, boost::normal_distribution<double> >(boost::mt19937(time(0)), boost::normal_distribution<>(0, 1));
 	}
 	MonteCarlo::~MonteCarlo()													/* Destructor. */
 	{

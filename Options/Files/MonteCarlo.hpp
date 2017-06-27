@@ -22,7 +22,7 @@
 
 #include <boost/random/variate_generator.hpp>
 #include <boost/random/mersenne_twister.hpp>
-#include <boost/math/distributions/normal.hpp>
+#include <boost/random/normal_distribution.hpp>
 #include <cmath>
 #include <string>
 #include <vector>
@@ -39,7 +39,7 @@ namespace Options
 		////////////////////////////
 		// State Variables/Objects:
 		////////////////////////////
-		boost::variate_generator<boost::mt19937, boost::math::normal_distribution<double> > *mainRNG;	/* Random number generator for Monte Carlo path generation. */
+		boost::variate_generator<boost::mt19937, boost::normal_distribution<double> > *mainRNG;	/* Random number generator for Monte Carlo path generation. */
 		unsigned long nSIM, nT;									/* Number of trials and time intervals for price generator. */
 	public:
 		////////////////////////////
