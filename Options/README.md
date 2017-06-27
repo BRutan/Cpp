@@ -19,5 +19,5 @@ that describe behavior of stock options (price, greeks, finite difference method
     - Create new Visual C++ -> General -> Empty Project.
     - Add all header and source files in File sub-folder to the project (via right click \<Project Name\> -> Add -> Existing Item in the         Solution Explorer window).
     - Add ONE of the desired test files (in Options super-folder) to the project.
-    - Implement Boost libraries via navigating to Project -> Properties -> VC++ Directories and adding '\<Your Path>\boost_1_64_0\boost\'       absolute filepath to the 'Include Directories' area.
+    - Implement Boost libraries via navigating to Project -> Properties -> VC++ Directories and adding '\<Your Path>\boost_1_64_0'               absolute filepath to the 'Include Directories' area.
     - Click Build -> Build Solution (CTRL-SHIFT-B) then click Debug -> Start Debugging (F5) to run the solution.
