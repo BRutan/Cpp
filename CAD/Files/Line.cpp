@@ -50,11 +50,11 @@ namespace CAD
 	////////////////////////////////
 	// Accessors:
 	////////////////////////////////
-	Point BenRutan::CAD::Line::P1() const					/* Return copy of P1. */
+	Point CAD::Line::P1() const					/* Return copy of P1. */
 	{
 		return p1;
 	}
-	Point BenRutan::CAD::Line::P2() const					/* Return copy of P2. */
+	Point CAD::Line::P2() const					/* Return copy of P2. */
 	{
 		return p2;
 	}

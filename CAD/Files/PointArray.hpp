@@ -20,7 +20,7 @@ Member Functions:
 
 namespace Containers
 {
-	class PointArray : public Array<BenRutan::CAD::Point>
+	class PointArray : public Array<CAD::Point>
 	{
 	public:
 		////////////////////////////
