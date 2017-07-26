@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------------------
 ## Folder description:
 ------------------------------------------------------------------------------------------------------------------------------------
-Contains following examples of usage (using header and source files contained in Files sub-folder):
+Contains following examples of usage (using header and source files contained in Files sub-folder) I.E. test files:
 
 - OptionsAndGeneratorExampleUsage.cpp: Example usage of derived AmericanPerpetualOption, EuropeanOption classes and MeshGenerator class
 that describe behavior of stock options (price, greeks, finite difference method approximation) and generate large number of iterates  that give further insight to how option behavior changes with respect to chosen variables (stock price, strike price, time, risk free rate, cost of carry, implied volatility).
@@ -18,6 +18,6 @@ that describe behavior of stock options (price, greeks, finite difference method
   * Visual Studio:
     - Create new Visual C++ -> General -> Empty Project.
     - Add all header and source files in File sub-folder to the project (via right click \<Project Name\> -> Add -> Existing Item in the         Solution Explorer window).
-    - Add ONE of the desired test files (in Options super-folder) to the project.
+    - Add ONE of the desired test files (in this folder) to the project.
     - Implement Boost libraries via navigating to Project -> Properties -> VC++ Directories and adding '\<Your Path>\boost_1_64_0'               absolute filepath to the 'Include Directories' area.
     - Click Build -> Build Solution (CTRL-SHIFT-B) then click Debug -> Start Debugging (F5) to run the solution.
