@@ -1,6 +1,6 @@
 /* Main.cpp (problem 2.3)
 Description:
-	* Solutions to exercise 2.3.1-2.3.3.
+	* Solutions to exercise 2.3.1-2.3.4.
 */
 
 #include <array>
@@ -103,12 +103,24 @@ int main()
 	auto h2 = max(f, g);
 	std::cout << "min(f,g): " << h1(2.0) << std::endl;
 	std::cout << "max(f,g): " << h2(2.0) << std::endl;
+
 	auto h3 = min(h1, max(2 * f, 3 * g));
 	auto h4 = max(h2, max(-2 * f, 3 * g));
 
 	/* 2.3.4 */
-
-
+	// Test the emulations of deprecated C++98 STL bind functions:
+	std::function<double(const double&, const double&)> fxy = [](const double &in_1, const double &in_2) { return in_1 * in_2 * -9; };
+	double yval = 10.0; 
+	ScalarFunction fx = bind2nd<double>(fxy, yval); 
+	std::cout << fx(3.0) << std::endl;
+	// Test new bind code on STL algorithms 
+	std::vector<double> vec(10, 2.0); 
+	std::transform(vec.begin(), vec.end(), vec.begin(), fx); 
+	for (auto i = 0; i < vec.size(); ++i) 
+	{ 
+		std::cout << vec[i] << ","; 
+	}
+	std::cout << std::endl;
 
 	system("pause");
 
