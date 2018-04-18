@@ -2,12 +2,9 @@
 Description:
 	* Base class to be implemented in Main.cpp in list.
 */
-
 #ifndef BASE_HPP
 #define BASE_HPP
-
 #include <iostream>
-
 class Base
 { 
 // Base class
@@ -29,7 +26,6 @@ private:
 public:
 	Derived() : Base() 
 	{ 
-
 	}
 	~Derived() 
 	{ 
@@ -40,5 +36,4 @@ public:
 		std::cout << "derived object\n"; 
 	}
 };
-
 #endif

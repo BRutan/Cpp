@@ -22,10 +22,8 @@ Member Functions:
 	*void Draw() const: Draw the calling Point object.
 	*string ToString() const: return string "Point(m_x, m_y)", description of current state of Point object.
 */
-
 #ifndef POINT_HPP
 #define POINT_HPP
-
 #include <iostream>
 #include <string>
 #include "Shape.hpp"
@@ -77,5 +75,4 @@ public:
 	// Global operators:
 	friend std::ostream& operator<<(std::ostream&, const Point&) noexcept;	/* Overloaded ostream operator. */
 };
-
 #endif

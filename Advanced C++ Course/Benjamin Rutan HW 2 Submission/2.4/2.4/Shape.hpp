@@ -15,12 +15,9 @@ Member Functions:
 	*virtual void display(IODevice&) const:
 	*virtual string ToString() const: return string description of calling Shape object.
 */
-
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
-
 #include <string>
-
 class Shape
 {
 private:
@@ -50,6 +47,4 @@ public:
 	////////////////////////////
 	Shape& operator=(const Shape&) noexcept;			 /* Assignment operator (with Shape). */
 };
-
-　
 #endif

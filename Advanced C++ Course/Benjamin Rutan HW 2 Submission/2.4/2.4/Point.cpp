@@ -23,35 +23,28 @@ Member Functions:
 	*void display(IODevice&) const: Display the point on a passed input-output device.
 	*string ToString() const: return string "Point(m_x, m_y)", description of current state of Point object.
 */
-
 #include <cmath>
 #include <string>
 #include <sstream>
 #include "Point.hpp"
 #include "Shape.hpp"
-
 /////////////////////////////////
 // Constructors and Destructor:
 /////////////////////////////////
 Point::Point() noexcept : m_x(), m_y(), Shape()									/* Default Constructor. */
 {
-
 }
 Point::Point(double x_in, double y_in) noexcept : m_x(x_in), m_y(y_in), Shape()	/* Overloaded Constructor (set m_x and m_y). */
 {
-
 }
 Point::Point(double xy_in) noexcept : m_x(xy_in), m_y(xy_in), Shape()			/* Conversion Constructor. */
 {
-
 }
 Point::Point(const Point &point_in) noexcept : m_x(point_in.X()), m_y(point_in.Y()), Shape(point_in)			/* Copy Constructor. */
 {
-
 }
 Point::~Point() noexcept  									/* Destructor. */
 {
-
 }
 /////////////////////////////////
 // Accessors: 
@@ -80,7 +73,6 @@ void Point::Y(double y_in) noexcept						/* Set value of y coordinate. */
 /////////////////////////////////
 void Point::Draw() const noexcept									/* Draw the point. */
 {
-
 }
 double Point::Distance() const noexcept								/* Calculate and return Point's euclidean distance from passed point. */
 {
@@ -96,7 +88,6 @@ std::string Point::ToString() const	noexcept 				 /* Return string containing cu
 	// Append the base Shape object description to Point object description:
 	std::string s = Shape::ToString();
 	ss << "Point(" << m_x << ", " << m_y << ") " << s;
-
 	return ss.str();
 }
 ///////////////////////////////
@@ -138,7 +129,6 @@ Point& Point::operator*=(double factor)	noexcept				/* Scale the coordinates and
 {
 	m_x *= factor;
 	m_y *= factor;
-
 	return *this;
 }
 // Global operators:

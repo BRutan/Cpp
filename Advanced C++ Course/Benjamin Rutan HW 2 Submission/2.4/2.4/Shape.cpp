@@ -14,26 +14,21 @@ Member Functions:
 	*virtual void Draw() const: Pure Virtual Memory Function to be overriden in derived classes.
 	*virtual string ToString() const: return string description of calling Shape object.
 */
-
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include "Shape.hpp"
-
 ////////////////////////////
 // Constructors/Destructor:
 ////////////////////////////
 Shape::Shape() noexcept : m_id(std::rand())		/* Default constructor. Sets m_id to a random integer in between 0 and RAND_MAX. */
 {
-
 }
 Shape::Shape(const Shape &shape_in) noexcept : m_id(shape_in.m_id) /* Copy constructor. Sets m_id to passed Shape object's m_id. */
 {
-
 }
 Shape::~Shape() noexcept										  /* Destructor. */
 {
-
 }
 ////////////////////////////
 // Accessors:

@@ -2,14 +2,11 @@
 Description:
 	* Test the shared_ptr smart pointer class.
 */
-
 #ifndef CLASSES_HPP
 #define CLASSES_HPP
-
 #include <iostream>
 #include <memory>
 #include "Point.hpp"
-
 class C1 
 {
 private: 
@@ -18,7 +15,6 @@ private:
 public: 
 	C1(std::shared_ptr<Point> value) : d(value) 
 	{
-
 	} 
 	virtual ~C1() 
 	{ 
@@ -38,7 +34,6 @@ private:
 public:
 	C2(std::shared_ptr<Point> value) : d(value)
 	{
-
 	}
 	virtual ~C2()
 	{
@@ -49,6 +44,4 @@ public:
 		std::cout << "Value " << *d;
 	}
 };
-
-　
 #endif
