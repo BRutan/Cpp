@@ -8,9 +8,9 @@ Functions:
 	* GetCharacteristics_dependent(const error_code &err) noexcept: Return tuple containing message, error number and category for passed error_code.
 */
 
-
 #ifndef WRAPPERS_HPP
 #define WRAPPERS_HPP
+
 #include <cerrno>
 #include <fstream>
 #include <iostream>
