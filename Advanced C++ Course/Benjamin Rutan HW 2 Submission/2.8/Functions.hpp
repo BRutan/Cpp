@@ -1,6 +1,6 @@
-/*
+/* Functions.hpp (exercise 2.8.1, 2.8.4 etc)
 
-
+　
 */
 
 #ifndef FUNCTIONS_HPP
@@ -10,13 +10,72 @@
 #include <vector>
 #include <string>
 
-template<int N>
-std::bitset<N> CreateBitsetFromString(const std::string &str_in, std::size_t startIndex = 0)
+/* 2.8.4 */
+// Misc functions: 
+
+// Convert unsigned long long to vector bitset:
+void ConvertULLToVectorBitset(std::vector<bool> &in, unsigned long long value)
 {
-	return std::bitset<N>(str_in.substr(startIndex, N));
+	std::size_t currIndex = 0;
+	while (value)
+	{
+		in[currIndex] = value % 2;
+		value /= 2;
+	}
+}
+// Convert vector bitset to string:
+std::string VectorBitsetToString(const std::vector<bool> &in)
+{
+	std::string output;
+	for (auto i : in)
+	{
+		output += (i) ? "1" : "0";
+	}
+	return output;
+}
+// Perform bitwise AND between two same-sized vector bitsets:
+std::vector<bool> AND(const std::vector<bool> &lhs, const std::vector<bool> &rhs)
+{
+	if (lhs.size() != rhs.size())
+	{
+		throw -1;
+	}
+	std::vector<bool> output(lhs);
+	for (std::size_t i = 0; i < lhs.size(); i++)
+	{
+		output[i] = lhs[i] & rhs[i];
+	}
+	return output;
+}
+// Perform bitwise OR between two same-sized vector bitsets:
+std::vector<bool> OR(const std::vector<bool> &lhs, const std::vector<bool> &rhs)
+{
+	if (lhs.size() != rhs.size())
+	{
+		throw - 1;
+	}
+	std::vector<bool> output(lhs);
+	for (std::size_t i = 0; i < lhs.size(); i++)
+	{
+		output[i] = lhs[i] | rhs[i];
+	}
+	return output;
+}
+// Perform bitwise XOR between two same-sized vector bitsets:
+std::vector<bool> XOR(const std::vector<bool> &lhs, const std::vector<bool> &rhs)
+{
+	if (lhs.size() != rhs.size())
+	{
+		throw - 1;
+	}
+	std::vector<bool> output(lhs);
+	for (std::size_t i = 0; i < lhs.size(); i++)
+	{
+		output[i] = lhs[i] ^ rhs[i];
+	}
+	return output;
 }
 
-/* 2.8.4 */
 // b) Create function to compute intersection of two vectors:
 std::vector<bool> Intersection(const std::vector<bool> &first, const std::vector<bool> &second)
 {
@@ -24,13 +83,13 @@ std::vector<bool> Intersection(const std::vector<bool> &first, const std::vector
 	std::size_t outputSize = (first.size() > second.size()) ? first.size() : second.size();
 	std::size_t smallerSize = (first.size() > second.size()) ? second.size() : first.size();
 	std::vector<bool> output(outputSize, false);
-	
+
 	// Determine all common indices:
 	for (std::size_t i = 0; i < outputSize; i++)
 	{
 		if (i < smallerSize)
 		{
-			output.push_back(first[i] and second[i] || !first[i] and !second[i]);
+			output.push_back(first[i] & second[i] || !first[i] & !second[i]);
 		}
 		else
 		{
@@ -40,10 +99,9 @@ std::vector<bool> Intersection(const std::vector<bool> &first, const std::vector
 	return output;
 }
 
-
-
-
-
-
+　
+　
+　
 #endif 
 
+　
