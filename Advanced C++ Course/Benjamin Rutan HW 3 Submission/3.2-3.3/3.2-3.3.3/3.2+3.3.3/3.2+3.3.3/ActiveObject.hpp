@@ -50,9 +50,9 @@ public:
 	////////////////////////////
 	// Misc. Methods:
 	////////////////////////////
-	bool HasThread()													/* Return true if object is storing pointer to active thread. */
+	bool HasThread()													/* Return true if object is storing pointer to active thread allocated on heap. */
 	{
-		return storedThread != 0;
+		return storedThread;
 	}
 	////////////////////////////
 	// Overloaded Operators:
