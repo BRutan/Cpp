@@ -28,7 +28,6 @@ int main()
 	output = std::async(std::launch::deferred, func2, 4.0, 5.0);
 	std::cout << "func2(4,5) output with launch::deferred policy: " << output.get() << std::endl;
 
-
 	system("pause");
 
 	return 0;
