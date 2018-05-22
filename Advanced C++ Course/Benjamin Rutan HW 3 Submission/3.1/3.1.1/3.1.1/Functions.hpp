@@ -48,5 +48,4 @@ void freeFunc(const std::string &s, int count)
 	Iprint(s, count);
 }
 
-
 #endif
