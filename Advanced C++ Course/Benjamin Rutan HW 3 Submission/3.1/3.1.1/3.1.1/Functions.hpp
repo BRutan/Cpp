@@ -1,8 +1,8 @@
 /* Functions.hpp (exercise 3.1.1)
 Description:
-	* 
-
+	* Define functions to test multi-threading.
 */
+
 #ifndef FUNCTIONS_HPP
 #define FUNCTIONS_HPP
 
@@ -15,7 +15,7 @@ Description:
 // Interface function that prints string large number of times :
 void Iprint(const std::string &s, int count)
 {
-	std::cout << std::this_thread::get_id() << std::endl;
+	std::cout << "This thread id: " << std::this_thread::get_id() << std::endl;
 	for (unsigned i = 0; i < count; i++)
 		std::cout << s  << std::endl;
 }
@@ -24,19 +24,16 @@ struct FObj
 {
 	static void staticMemberFunc(const std::string s, int i)
 	{
-		std::cout << std::this_thread::get_id() << std::endl;
 		Iprint(s, i);
 	}
 	void operator()(const std::string s, int i)
 	{
-		std::cout << std::this_thread::get_id() << std::endl;
 		Iprint(s, i);
 	}
 };
 
 auto storedLambda = [](const std::string &s, int count) 
 { 
-	std::cout << std::this_thread::get_id() << std::endl; 
 	Iprint(s, count); 
 };
 
@@ -44,9 +41,8 @@ auto boundMemberFunc = std::bind(&FObj::staticMemberFunc, std::placeholders::_1,
 
 void freeFunc(const std::string &s, int count)
 {
-	std::cout << std::this_thread::get_id() << std::endl;
 	Iprint(s, count);
 }
 
-
+　
 #endif
