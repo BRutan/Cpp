@@ -36,7 +36,7 @@ public:
 	/////////////////////////////
 	// Overloaded Operators:
 	/////////////////////////////
-	void operator()() noexcept					/* Put data into the synchronized queue. */
+	void operator()() noexcept					
 	{
 		std::this_thread::sleep_for(std::chrono::seconds());
 		if (!syncQueue.Full() && !shopClosed->load())
@@ -58,13 +58,11 @@ public:
 
 class Consumer				/* Barber class */
 {
-private:
-	int m_id;
 public:
 	/////////////////////////////
 	// Constructors/Destructor:
 	/////////////////////////////
-	Consumer(int id) noexcept : m_id(id)
+	Consumer() noexcept
 	{
 		shopClosed.store(false);
 	}
@@ -93,7 +91,6 @@ public:
 				std::cout << "Barber: Finished cutting hair." << std::endl;
 				serviceCount++;
 			}
-			
 		}
 		std::cout << "Barber: Closed shop. " << std::endl;
 		shopClosed.store(true);
