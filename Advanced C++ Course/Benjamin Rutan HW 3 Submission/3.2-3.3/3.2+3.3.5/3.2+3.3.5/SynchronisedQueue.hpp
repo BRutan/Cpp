@@ -15,15 +15,18 @@ Class Methods:
 #ifndef SYNCHRONISEDQUEUE_HPP
 #define SYNCHRONISEDQUEUE_HPP
 
+#define MAXFREECHAIRS 20
+
 #include <queue>
 #include <mutex>
+
+std::mutex m_mutex;
+std::condition_variable m_cond;
 
 template<typename T>
 class SynchronisedQueue
 {
 private:
-	std::mutex m_mutex;
-	std::condition_variable m_cond;
 	std::queue<T> m_data;
 public:
 	////////////////////////////
@@ -59,6 +62,14 @@ public:
 		m_data.push(data_in);
 		// Notify other threads that data has been added:
 		m_cond.notify_one();
+	}
+	bool Full() noexcept
+	{
+		return m_data.size() == MAXFREECHAIRS;
+	}
+	std::size_t Size() noexcept
+	{
+		return m_data.size();
 	}
 	////////////////////////////
 	// Overloaded Operators:

@@ -20,10 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Customer.hpp">
+    <ClInclude Include="ProducerConsumer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Barber.hpp">
+    <ClInclude Include="SynchronisedQueue.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

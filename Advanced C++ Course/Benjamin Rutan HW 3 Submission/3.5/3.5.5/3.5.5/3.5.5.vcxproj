@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{BAE5A2EE-B1E6-48A0-B681-B1B658BEA57C}</ProjectGuid>
-    <RootNamespace>My314</RootNamespace>
+    <ProjectGuid>{61D22B1E-413D-4885-9C0E-90DF202FE02A}</ProjectGuid>
+    <RootNamespace>My355</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -114,10 +114,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="ProducerConsumer.hpp" />
-    <ClInclude Include="SynchronisedQueue.hpp" />
-  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

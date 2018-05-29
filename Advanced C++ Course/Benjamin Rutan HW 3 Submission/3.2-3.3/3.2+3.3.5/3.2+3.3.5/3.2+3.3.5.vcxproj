@@ -118,8 +118,8 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Barber.hpp" />
-    <ClInclude Include="Customer.hpp" />
+    <ClInclude Include="ProducerConsumer.hpp" />
+    <ClInclude Include="SynchronisedQueue.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

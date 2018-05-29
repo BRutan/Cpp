@@ -30,19 +30,20 @@ std::atomic_flag flag = ATOMIC_FLAG_INIT;
 void WorkerThread()
 {
 	std::cout << "Worker is called." << std::endl;
-	// std::unique_lock<std::mutex> mLock(m);
-	// cv.wait(mLock, [] {return workerReady.load(); });
+	std::unique_lock<std::mutex> mLock(m);
+	cv.wait(mLock, [] {return workerReady.load(); });
+	/*
 	while (!flag.test_and_set(std::memory_order_acquire))
 	{
 		// Do nothing while waiting...
-	}
+	}*/
 	std::cout << "Worker is processing data. " << std::endl;
 	data += "Worker has added data.";
 	// Signify that worker has added data:
-	flag.clear(std::memory_order_release);
-	// masterReady.store(true);
-	// mLock.unlock();
-	// cv.notify_one();
+	// flag.clear(std::memory_order_release);
+	masterReady.store(true);
+	mLock.unlock();
+	cv.notify_one();
 	std::cout << "Worker is exited." << std::endl;
 }
 

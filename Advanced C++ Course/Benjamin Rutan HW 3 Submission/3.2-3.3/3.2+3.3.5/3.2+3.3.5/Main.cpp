@@ -9,25 +9,36 @@ Description:
 #include <iostream>
 #include <mutex>
 #include <thread>
+#include <Vector>
 
 #include "Barber.hpp"
 #include "Customer.hpp"
+#include "SynchronisedQueue.hpp"
 
 int main()
 {
-	std::mutex *m = new std::mutex();
-	std::lock_guard<std::mutex> guard(*m);
-	std::atomic<bool> custArrived = false;
-	std::atomic<bool> finishedService = true;
-	std::atomic<bool> shopClosed = false;
-	std::atomic<unsigned> freeChairs = MAXFREECHAIRS;
-
-	Barber barber(m, custArrived, freeChairs, finishedService, shopClosed);
-	Customer cust();
-	// Start producer consumer threads:
-	std::thread(barber);
-	// Randomly start customer threads:
-
+	/* 3.2+3.3.5 */
+	Barber barb(freeChairs, finishedService, shopClosed);
+	Customer cust(freeChairs, finishedService, shopClosed);
+	// Start consumer thread:
+	std::thread barberThd(std::ref(barb));
+	// Start customer threads:
+	std::vector<std::thread> custThds;
+	
+	for (std::size_t numCusts = 0; numCusts < 102; numCusts++)
+	{
+		custThds.push_back(std::thread(std::ref(cust)));
+	}
+	while (!shopClosed->load())
+	{
+		// Wait until the shop has closed.
+	}
+	for (std::size_t numCusts = 0; numCusts < 102; numCusts++)
+	{
+		custThds[numCusts].join();
+	}
+	
+	barberThd.join();
 
 	return 0;
 }

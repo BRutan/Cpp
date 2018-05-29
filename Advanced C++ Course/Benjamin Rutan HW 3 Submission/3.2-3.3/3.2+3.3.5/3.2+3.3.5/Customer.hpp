@@ -7,7 +7,6 @@ Description:
 
 */
 
-
 #ifndef CUSTOMER_HPP
 #define CUSTOMER_HPP
 
@@ -16,56 +15,55 @@ Description:
 #include <condition_variable>
 #include <iostream>
 #include <mutex>
+#include "SynchronisedQueue.hpp"
 
+std::condition_variable cv;
+std::mutex mut;
 
 class Customer
 {
 private:
-	std::shared_ptr<std::mutex> mut;
-	std::shared_ptr<std::atomic<unsigned>> freeChairs;
+	static unsigned id;
 	std::shared_ptr<std::atomic<bool>> finishedService;
 	std::shared_ptr<std::atomic<bool>> shopClosed;
-	std::condition_variable cond;
 public:
 	////////////////////////////
 	// Constructors/Destructor:
 	////////////////////////////
-	Customer(std::mutex *mut_in, std::atomic<bool> *closeShop_in, std::atomic<unsigned> *freeChairs_in, std::atomic<bool> *finishedService_in) : mut(mut_in), shopClosed(closeShop_in), cond(), freeChairs(freeChairs_in), finishedService(finishedService_in)
+	Customer(std::atomic<bool> *finishedService_in, std::atomic<bool> *closeShop_in, SynchronisedQueue<unsigned> *syncQueue_in) noexcept : finishedService(finishedService_in), shopClosed(closeShop_in), syncQueue(syncQueue_in)
 	{
-
+		
 	}
-	Customer(const Customer&) = delete;
 	virtual ~Customer()
 	{
-
+		finishedService.reset();
+		shopClosed.reset();
+		syncQueue.reset();
 	}
 	////////////////////////////
 	// Overloaded Operators:
 	////////////////////////////
-	void operator()()
+	void operator()() noexcept
 	{
-		std::unique_lock<std::mutex> mLock(*mut);
-		std::this_thread::sleep_for(std::chrono::seconds(10));
-		if (freeChairs->load() && !shopClosed->load())
+		std::this_thread::sleep_for(std::chrono::seconds(2));
+		if (syncQueue-> && !shopClosed->load())
 		{
-			std::cout << "Customer has entered shop." << std::endl;
-			freeChairs->store(*freeChairs - 1);
-			// Wait for Barber to finish.
-			cond.wait(mLock, [this] {return finishedService->load(); });
-			std::cout << "Customer has left." << std::endl;
+			std::cout << "Customer " << id << ": Has entered shop." << std::endl;
+			freeChairs->store(freeChairs->load() - 1);
+			cv.notify_all();
+			cv.wait(mLock, [this] { return finishedService->load(); });
+			std::cout << "Customer " << id << ": Has left." << std::endl;
 		}
 		else if(!freeChairs->load())
 		{
-			std::cout << "Customer has balked since shop is full." << std::endl;
+			std::cout << "Customer: Left since shop is full." << std::endl;
 		}
 		else if (shopClosed->load())
 		{
-			std::cout << "Customer has balked since shop is closed." << std::endl;
+			std::cout << "Customer: Left since shop has closed." << std::endl;
 		}
 	}
-	Customer& operator=(const Customer&) = delete;
 };
-
 
 
 #endif

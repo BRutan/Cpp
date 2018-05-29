@@ -14,19 +14,19 @@ int main()
 	std::cout << "Master is called." << std::endl;
 	std::thread worker(WorkerThread);
 	{
-		// std::lock_guard<std::mutex> mLock(m);
-		// workerReady.store(true);
-		flag.test_and_set(std::memory_order_acquire);
+		std::lock_guard<std::mutex> mLock(m);
+		workerReady.store(true);
+		// flag.test_and_set(std::memory_order_acquire);
 	}
 	std::cout << "Master has notified worker. Wait for response." << std::endl;
-	// cv.notify_one();
+	cv.notify_one();
 	{
-		// std::unique_lock<std::mutex> mLock(m);
-		while (flag.test_and_set(std::memory_order_release))
+		std::unique_lock<std::mutex> mLock(m);
+		/*while (flag.test_and_set(std::memory_order_release))
 		{
 			// Do nothing while waiting for signal from atomic_flag:
-		}
-		// cv.wait(mLock, [] { return masterReady.atomic<bool>load(); });
+		}*/
+		cv.wait(mLock, [] { return masterReady.load(); });
 	}
 	std::cout << "Master back. " << std::endl;
 	std::cout << "Data: " << data << std::endl;

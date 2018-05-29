@@ -1,9 +1,6 @@
 /* ProducerConsumer.hpp (exercise 3.1.4)
 Description:
-	* 
-
-
-
+	* Producer stores values in shared synchronised queue, consumer prints values to stdout.
 */
 
 
@@ -11,20 +8,22 @@ Description:
 #define PRODUCERCONSUMER_HPP
 
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
 #include "SynchronisedQueue.hpp"
+
+SynchronisedQueue<std::string> syncQueue;
 
 class Producer
 {
 private:
 	int m_id;
-	SynchronisedQueue<std::string> *m_data;
 public:
 	/////////////////////////////
 	// Constructors/Destructor:
 	/////////////////////////////
-	Producer(int id, SynchronisedQueue<std::string> *items) : m_id(id), m_data(items)
+	Producer(int id) noexcept : m_id(id)
 	{
 
 	}
@@ -35,31 +34,30 @@ public:
 	/////////////////////////////
 	// Overloaded Operators:
 	/////////////////////////////
-	void operator()()					/* Put data into the synchronized queue. */
+	void operator()() noexcept					/* Put data into the synchronized queue. */
 	{
 		std::stringstream ss;
 		int data = 0;
-		while (m_data->CheckCond())
+		while (data < 10)
 		{
-			ss.clear();
+			ss.str("");
 			ss << "Producer " << m_id << " data: " << data++;
-			m_data->Enqueue(ss.str());
+			syncQueue.Enqueue(ss.str());
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 		}
+		std::cout << "Producer finished. " << std::endl;
 	}
 };
 
-template<typename T>
 class Consumer
 {
 private:
 	int m_id;
-	SynchronisedQueue<T> *m_data;
 public:
 	/////////////////////////////
 	// Constructors/Destructor:
 	/////////////////////////////
-	Consumer(int id, SynchronisedQueue<T> *items) : m_id(id), m_data(items)
+	Consumer(int id) noexcept : m_id(id)
 	{
 
 	}
@@ -70,14 +68,16 @@ public:
 	/////////////////////////////
 	// Overloaded Operators:
 	/////////////////////////////
-	void operator()()					/* Read data from the synchronised queue. */
+	void operator()() noexcept					/* Read data from the synchronised queue. */
 	{
-		while (m_data->CheckCond())
+		int data = 0;
+		while (data < 10)
 		{
-			std::cout << "Consumer " << m_id << " consumed: " << m_data->Dequeue() << std::endl;
+			std::cout << "Consumer " << m_id << " consumed: " << syncQueue.Dequeue() << std::endl;
+			data++;
 		}
+		std::cout << "Done consuming." << std::endl;
 	}
 };
-
 
 #endif
