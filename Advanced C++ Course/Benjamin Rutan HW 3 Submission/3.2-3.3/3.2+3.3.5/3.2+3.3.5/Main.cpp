@@ -1,8 +1,6 @@
 /* Main.cpp (exercise 3.2+3.3.5)
 Description:
-	*
-
-
+	* Solutions to problems a-c for exercise 3.2+3.3.5. 
 */
 
 #include <atomic>
@@ -18,20 +16,24 @@ int main()
 {
 	/* 3.2+3.3.5 */
 	// Start barber thread:	
-	std::thread barberThd(Consumer);
+	Consumer barber;
+	std::thread barberThd(barber);
+	std::vector<Producer> customers;
 	// Start customer threads:
 	std::vector<std::thread> custThds;
-	
-	for (std::size_t numCusts = 0; numCusts < 102; numCusts++)
+	for (std::size_t cust_id = 0; cust_id < 102; cust_id++)
 	{
-		custThds.push_back(std::thread(Producer(numCusts)));
+		customers.push_back(Producer(cust_id));
+		custThds.push_back(std::thread(customers[cust_id]));
 	}
-	for (std::size_t numCusts = 0; numCusts < 102; numCusts++)
+	for (std::size_t cust_id = 0; cust_id < 102; cust_id++)
 	{
-		custThds[numCusts].join();
+		custThds[cust_id].join();
 	}
-	
+
 	barberThd.join();
 
+	system("pause");
+	
 	return 0;
 }

@@ -1,10 +1,10 @@
-/* SynchronisedQueue.hpp (exercise 3.2+3.3.5)
+/* SynchronisedQueue.hpp (exercise 3.5.4)
 Description:
 	* Thread safe FIFO queue.
 Member Objects:
 	* mutex m_mutex: mutual exclusion object to ensure thread safe enqueueing and dequeing.
 	* condition_variable m_cond: to signify tasks have finished.
-	* queue<T> m_data: FIFO queue to store data.
+	* priority_queue<T> m_data: priority_queue to store data.
 Class Methods:
 	* SynchronisedQueue(): default constructor.
 	* ~SynchronisedQueue(): destructor.
@@ -15,24 +15,22 @@ Class Methods:
 #ifndef SYNCHRONISEDQUEUE_HPP
 #define SYNCHRONISEDQUEUE_HPP
 
-#define MAXFREECHAIRS 20
-
-#include <queue>
+#include <condition_variable>
 #include <mutex>
-
-std::mutex m_mutex;
-std::condition_variable m_cond;
+#include <queue>
 
 template<typename T>
 class SynchronisedQueue
 {
 private:
-	std::queue<T> m_data;
+	std::mutex m_mutex;
+	std::condition_variable m_cond;
+	std::priority_queue<T> m_data;
 public:
 	////////////////////////////
 	// Constructors/Destructor:
 	////////////////////////////
-	SynchronisedQueue() noexcept:  m_data()	/* Default constructor. */
+	SynchronisedQueue() noexcept: m_mutex(), m_cond(), m_data()	/* Default constructor. */
 	{
 
 	}
@@ -52,7 +50,7 @@ public:
 		{
 			m_cond.wait(lock);
 		}
-		T result = m_data.front();
+		T result = m_data.top();
 		m_data.pop();
 		return result;
 	}
