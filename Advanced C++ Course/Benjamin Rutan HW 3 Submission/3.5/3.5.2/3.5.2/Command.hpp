@@ -7,7 +7,6 @@ Description:
 #include <functional>
 #include <iostream>
 
-
 using FunctionType = std::function<double(double)>;
 
 class Command

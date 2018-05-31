@@ -35,7 +35,7 @@ void Erase(std::forward_list<T> &list_in, std::size_t position)
 }
 
 template<typename T>
-void Erase(std::forward_list<T> &list_in, typename std::forward_list<T>::iterator &start, typename std::forward_list<T>::iterator &end)
+void Erase(std::forward_list<T> &list_in, typename std::forward_list<T>::iterator start, typename std::forward_list<T>::iterator end)
 {
 	// Erase all values between iterators:
 	start = list_in.erase_after(start, end);

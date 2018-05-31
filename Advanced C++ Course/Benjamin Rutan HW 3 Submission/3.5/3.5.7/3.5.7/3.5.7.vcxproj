@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{34864DCB-6C1C-4553-9BD6-5FB0EE45B5C3}</ProjectGuid>
-    <RootNamespace>My352</RootNamespace>
+    <ProjectGuid>{305DCDDC-1229-476E-A816-BC1F526A17F5}</ProjectGuid>
+    <RootNamespace>My357</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -69,14 +69,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\rutan\Desktop\Course2\boost_1_66_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\rutan\Desktop\Course2\boost_1_66_0\lib32-msvc-14.1;C:\Users\rutan\Desktop\Course2\boost_1_66_0\libs;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\rutan\Desktop\Course2\boost_1_66_0;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\rutan\Desktop\Course2\boost_1_66_0\lib32-msvc-14.1;C:\Users\rutan\Desktop\Course2\boost_1_66_0\libs;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -84,9 +77,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>C:\Users\rutan\Desktop\Course2\boost_1_66_0\lib32-msvc-14.1;C:\Users\rutan\Desktop\Course2\boost_1_66_0\libs</AdditionalLibraryDirectories>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -94,11 +84,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\rutan\Desktop\Course2\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>C:\Users\rutan\Desktop\Course2\boost_1_66_0\lib32-msvc-14.1;C:\Users\rutan\Desktop\Course2\boost_1_66_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -130,9 +116,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Command.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
